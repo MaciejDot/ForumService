@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumService", "ForumService\ForumService.csproj", "{77FA55A5-9628-4B24-B7F0-B804D0692B89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumService.Data", "ForumService.Data\ForumService.Data.csproj", "{EB651CCB-EAEB-4217-966E-ED0AF3120081}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77FA55A5-9628-4B24-B7F0-B804D0692B89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77FA55A5-9628-4B24-B7F0-B804D0692B89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77FA55A5-9628-4B24-B7F0-B804D0692B89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77FA55A5-9628-4B24-B7F0-B804D0692B89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB651CCB-EAEB-4217-966E-ED0AF3120081}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB651CCB-EAEB-4217-966E-ED0AF3120081}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB651CCB-EAEB-4217-966E-ED0AF3120081}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB651CCB-EAEB-4217-966E-ED0AF3120081}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3E8F8905-BC68-4387-9202-9F59BE19DB63}
+	EndGlobalSection
+EndGlobal

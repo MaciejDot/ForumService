@@ -1,0 +1,34 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:51000",
+      "sslPort": 44362
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "Health",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SQLCONNSTR_ForumService": "Server=(localdb)\\mssqllocaldb;Database=ForumService;Trusted_Connection=True;",
+        "TokenServiceRSAAddress": "https://localhost:44344/RSAKey"
+      }
+    },
+    "ForumService": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "Health",
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SQLCONNSTR_ForumService": "Server=(localdb)\\mssqllocaldb;Database=ForumService;Trusted_Connection=True;",
+        "TokenServiceRSAAddress": "https://localhost:44344/RSAKey"
+      }
+    }
+  }
+}
