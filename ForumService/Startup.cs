@@ -36,6 +36,7 @@ namespace ForumService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddHealthChecks();
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddScoped<IStringToHtmlHelper, StringToHtmlHelper>();
             services.AddDbContext<ForumServiceContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ForumService")));
@@ -90,12 +91,13 @@ namespace ForumService
             {
                 app.UseHsts();
             }
+            app.UseRouting();
             app.UseDeveloperExceptionPage();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseCors();
             app.UseHttpsRedirection();
-
+            app.UseHealthChecks("/Health");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
