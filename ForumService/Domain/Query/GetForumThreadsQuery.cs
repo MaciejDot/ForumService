@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ForumService.Domain.Query
 {
-    public class GetForumThreadsQuery :IRequest<List<GetForumThreadsDTO>>
+    public class GetForumThreadsQuery :IRequest<ForumThreadsDTO>
     {
         public int TakeThreads { get; set; }
         public int SkipThreads { get; set; }

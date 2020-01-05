@@ -34,7 +34,7 @@ namespace ForumService.Forum
 
         [HttpPost]
         [Authorize(Roles = "admin")]
-        public async Task<ActionResult> Post(CreateSubject command, CancellationToken token)
+        public async Task<ActionResult> Post([FromForm] CreateSubject command, CancellationToken token)
         {
             if (!ModelState.IsValid)
             {

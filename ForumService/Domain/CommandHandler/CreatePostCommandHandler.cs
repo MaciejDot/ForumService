@@ -22,12 +22,12 @@ namespace ForumService.Domain.CommandHandler
         {
             var post = new Post
             {
-                Author = await _context.Users.FindAsync(new object[] { command.UserId },token),
+                AuthorId = command.UserId,
+                ThreadId = command.ThreadId,
                 Created = DateTime.Now,
                 Answear = command.Content
             };
-            var thread = await _context.Threads.FindAsync(new object[] { command.ThreadId }, token);
-            thread.Post.Add(post);
+            await _context.Posts.AddAsync(post, token);
             await _context.SaveChangesAsync(token);
             return new CreatePostResponseDTO { 
                 PostPlace = _context.Threads.Find(command.ThreadId).Post.Count(x => x.Created < post.Created) + 1 

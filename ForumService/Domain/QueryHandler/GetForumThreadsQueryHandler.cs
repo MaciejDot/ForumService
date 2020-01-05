@@ -11,16 +11,18 @@ using System.Threading.Tasks;
 
 namespace ForumService.Domain.QueryHandler
 {
-    public class GetForumThreadsQueryHandler :IRequestHandler<GetForumThreadsQuery,List<GetForumThreadsDTO>>
+    public class GetForumThreadsQueryHandler : IRequestHandler<GetForumThreadsQuery, ForumThreadsDTO>
     {
         private readonly ForumServiceContext _context;
         public GetForumThreadsQueryHandler(ForumServiceContext context)
         {
             _context = context;
         }
-        public Task<List<GetForumThreadsDTO>> Handle(GetForumThreadsQuery request, CancellationToken token)
+        public async Task<ForumThreadsDTO> Handle(GetForumThreadsQuery request, CancellationToken token)
         {
-            return Task.FromResult(_context.Threads.Where(t => t.Subject.Title == request.SubjectName)
+            return new ForumThreadsDTO
+            {
+                Threads = await _context.Threads.Where(t => t.Subject.Title == request.SubjectName)
                 .OrderByDescending(thread => thread.Created)
                 .Skip(request.SkipThreads)
                 .Take(request.TakeThreads)
@@ -35,7 +37,10 @@ namespace ForumService.Domain.QueryHandler
                         LastActivity = thread.Post.Any() ? thread.Post.Max(post => post.Created) : thread.Created
                     }
                 )
-                .ToList());
+                .ToListAsync(token),
+                allThreadsCount = await _context.Threads.CountAsync(t => t.Subject.Title == request.SubjectName, token),
+                Title = (await _context.Subjects.SingleAsync(x => x.Title == request.SubjectName)).Title
+            };
         }
     }
 }

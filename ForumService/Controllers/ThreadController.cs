@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ForumService.Domain.Command;
+using ForumService.Domain.DTO;
 using ForumService.Domain.Query;
 using ForumService.Helpers;
 using ForumService.Models;
@@ -49,7 +50,7 @@ namespace ForumService.Controllers
 
         [HttpGet("{subjectName}/{page}")]
         [AllowAnonymous]
-        public async Task<ActionResult> Get(string subjectName, int page,CancellationToken token)
+        public async Task<ActionResult<ForumThreadsDTO>> Get(string subjectName, int page,CancellationToken token)
         {
             if (page < 1)
             {
@@ -57,26 +58,12 @@ namespace ForumService.Controllers
             }
             try
             {
-                var threads = _mediator.Send(new GetForumThreadsQuery { SkipThreads = page * 20 - 20, SubjectName = subjectName, TakeThreads = 20 },token);
-                var threadsCount = _mediator.Send(new GetThreadsCountQuery { SubjectName = subjectName },token);
-                var subjectNameDatabase = _mediator.Send(new SubjectNameExistsInDatabaseQuery { SubjectName = subjectName },token);
-                await Task.WhenAll(threads, threadsCount, subjectNameDatabase);
-                if ((threadsCount.Result > (page - 1) * 20 || (threadsCount.Result == 0 && page == 1))&&subjectName== subjectNameDatabase.Result && subjectName != null)
-                {
-                    return new JsonResult(new
-                    {
-                        Title = subjectNameDatabase.Result,
-                        Threads = threads.Result,
-                        allThreadsCount = threadsCount.Result
-                    });
-                }
+                return await _mediator.Send(new GetForumThreadsQuery { SkipThreads = page * 20 - 20, SubjectName = subjectName, TakeThreads = 20 },token);      
             }
             catch
             {
                 return NotFound();
             }
-            return NotFound();
-
         }
     }
 }
